@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml,text/plain</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>main</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    // implement resource here
+	new AESJS();
+	var encryptionUtil = new EncryptionUtil();
+	
+	response.setContentType("text/plain");
+	var writer = response.getStreamWriter();
+	
+	
+	
+	var encodedKey = gs.getProperty('x_489506_aes_sandb.WeComAESKey');
+	var key = aesjs.util.convertStringToBytes(encodedKey + "=", "base64");
+
+	// The initialization vector, which must be 16 bytes
+	var iv = aesjs.util.convertStringToBytes(encodedKey.substring(0, 16));
+
+	// Convert text to bytes
+	var text = "RypEvHKD8QQKFhvQ6QleEB4J58tiPdvo+rtK1I9qca6aM/wvqnLSV5zEPeusUiX5L5X/0lWfrf0QADHHhGd3QczcdCUpj911L3vg3W/sYYvuJTs3TUUkSUXxaccAS0qhxchrRYt66wiSpGLYL42aM6A8dTT+6k4aSknmPj48kzJs8qLjvd4Xgpue06DOdnLxAUHzM6+kDZ+HMZfJYuR+LtwGc2hgf5gsijff0ekUNXZiqATP7PF5mZxZ3Izoun1s4zG4LUMnvw2r+KqCKIw+3IQH03v+BCA9nMELNqbSf6tiWSrXJB3LAVGUcallcrw8V2t9EL4EhzJWrQUax5wLVMNS0+rUPA3k22Ncx4XXZS9o0MBH27Bo6BpNelZpS+/uh9KsNlY6bHCmJU9p8g7m3fVKn28H3KDYA5Pl/T8Z1ptDAVe0lXdQ2YoyyH2uyPIGHBZZIs2pDBS8R07+qN+E7Q==";
+	var encryptedBytes = aesjs.util.convertStringToBytes(text, "base64");
+
+	// The cipher-block chaining mode of operation maintains internal
+	// state, so to decrypt a new instance must be instantiated.
+	var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
+	var decryptedBytes = aesCbc.decrypt(encryptedBytes);
+	
+	var content_bytes = decryptedBytes.slice(16);
+	
+	var msg_len_bytes = content_bytes.slice(0,4);
+	var msg_len = encryptionUtil.convertBytesToInt(msg_len_bytes);
+	
+	var msg_bytes = content_bytes.slice(4, msg_len + 4);
+	var msg = aesjs.util.convertBytesToString(msg_bytes);
+	
+	var receiveid_bytes = content_bytes.slice(msg_len + 4);
+	var receiveid = aesjs.util.convertBytesToString(receiveid_bytes);
+	receiveid = encryptionUtil.unpad(receiveid);
+	
+	writer.writeString(msg);
+	
+	
+	
+	
+	response.setStatus(200);
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_489506_aes_sandb/test</operation_uri>
+        <produces>application/json,application/xml,text/xml,text/plain</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-25 10:22:28</sys_created_on>
+        <sys_id>e7f9dc061b002010936a4196bc4bcbb5</sys_id>
+        <sys_mod_count>59</sys_mod_count>
+        <sys_name>main</sys_name>
+        <sys_package display_value="AES Sandbox" source="x_489506_aes_sandb">afd894c21b002010936a4196bc4bcbac</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AES Sandbox">afd894c21b002010936a4196bc4bcbac</sys_scope>
+        <sys_update_name>sys_ws_operation_e7f9dc061b002010936a4196bc4bcbb5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-10-25 17:05:36</sys_updated_on>
+        <web_service_definition display_value="Test">6ab91c061b002010936a4196bc4bcba8</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
