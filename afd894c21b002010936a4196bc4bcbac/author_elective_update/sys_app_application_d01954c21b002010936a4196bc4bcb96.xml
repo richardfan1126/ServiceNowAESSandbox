@@ -52,7 +52,7 @@
         <update_guid_history>dc19dcc2ec002010ab462aa185b47781:1636511521</update_guid_history>
     </sys_update_version>
     <sys_metadata_delete action="INSERT_OR_UPDATE">
-        <sys_audit_delete display_value="AES Sandbox">2d5914061b002010936a4196bc4bcbaa</sys_audit_delete>
+        <sys_audit_delete display_value="">2d5914061b002010936a4196bc4bcbaa</sys_audit_delete>
         <sys_class_name>sys_metadata_delete</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-25 10:19:18</sys_created_on>

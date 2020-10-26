@@ -25,7 +25,8 @@
 	var iv = aesjs.util.convertStringToBytes(encodedKey.substring(0, 16));
 
 	// Convert text to bytes
-	var text = "RypEvHKD8QQKFhvQ6QleEB4J58tiPdvo+rtK1I9qca6aM/wvqnLSV5zEPeusUiX5L5X/0lWfrf0QADHHhGd3QczcdCUpj911L3vg3W/sYYvuJTs3TUUkSUXxaccAS0qhxchrRYt66wiSpGLYL42aM6A8dTT+6k4aSknmPj48kzJs8qLjvd4Xgpue06DOdnLxAUHzM6+kDZ+HMZfJYuR+LtwGc2hgf5gsijff0ekUNXZiqATP7PF5mZxZ3Izoun1s4zG4LUMnvw2r+KqCKIw+3IQH03v+BCA9nMELNqbSf6tiWSrXJB3LAVGUcallcrw8V2t9EL4EhzJWrQUax5wLVMNS0+rUPA3k22Ncx4XXZS9o0MBH27Bo6BpNelZpS+/uh9KsNlY6bHCmJU9p8g7m3fVKn28H3KDYA5Pl/T8Z1ptDAVe0lXdQ2YoyyH2uyPIGHBZZIs2pDBS8R07+qN+E7Q==";
+	var text = request.queryParams.echostr;
+	text = String(text);
 	var encryptedBytes = aesjs.util.convertStringToBytes(text, "base64");
 
 	// The cipher-block chaining mode of operation maintains internal
@@ -65,14 +66,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-25 10:22:28</sys_created_on>
         <sys_id>e7f9dc061b002010936a4196bc4bcbb5</sys_id>
-        <sys_mod_count>59</sys_mod_count>
+        <sys_mod_count>77</sys_mod_count>
         <sys_name>main</sys_name>
         <sys_package display_value="AES Sandbox" source="x_489506_aes_sandb">afd894c21b002010936a4196bc4bcbac</sys_package>
         <sys_policy/>
         <sys_scope display_value="AES Sandbox">afd894c21b002010936a4196bc4bcbac</sys_scope>
         <sys_update_name>sys_ws_operation_e7f9dc061b002010936a4196bc4bcbb5</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-10-25 17:05:36</sys_updated_on>
+        <sys_updated_on>2020-10-26 07:23:46</sys_updated_on>
         <web_service_definition display_value="Test">6ab91c061b002010936a4196bc4bcba8</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
